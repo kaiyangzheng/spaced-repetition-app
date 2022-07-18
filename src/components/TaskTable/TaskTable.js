@@ -22,9 +22,14 @@ function createData(name, description, quality, ease_factor, repetitions, prev_r
   };
 }
 
+let theme = "light";
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    theme = "dark";
+}
+
 const darkTheme = createTheme({
     palette: {
-        mode: 'dark',
+        mode: theme,
     },
 })
 

@@ -81,4 +81,24 @@
       box-shadow: none;
     }
   }
+
+  @media screen and (prefers-color-scheme: dark) {
+      .login{
+        background-color: #000000 !important;
+        color: white;
+      }
+
+      .group button{
+        background-color: gray !important;
+        color: hsl(210, 10%, 70%)
+      }
+
+      .group input{
+        background-color: white
+      }
+
+      .group label{
+        color: hsl(210, 10%, 70%) !important;
+      }
+  }
   

@@ -17,9 +17,14 @@ function createData(name, description, date_added) {
   };
 }
 
+let theme = "light";
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    theme = "dark";
+}
+
 const darkTheme = createTheme({
     palette: {
-        mode: 'dark',
+        mode: theme,
     },
 })
 

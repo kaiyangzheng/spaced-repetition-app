@@ -20,9 +20,14 @@ function createData(name, description, quality, prev_review_date) {
   };
 }
 
+let theme = "light";
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    theme = "dark";
+}
+
 const darkTheme = createTheme({
     palette: {
-        mode: 'dark',
+        mode: theme,
     },
 })
 
