@@ -1,0 +1,18 @@
+Frontend Todo:
+1. Create tables for smaller screens
+2. Add task form
+3. Actions in Tasks section 
+    - delete
+    - update 
+4. Allow first review + update 
+5. Do task page 
+6. Upcoming task page
+7. Calendar 
+8. User Settings
+9. Make a landing page - if user has never visited site before (cookies)
+10. Custom Readme
+
+Backend Todo:
+1. User Task "interest" - categories of tasks 
+2. Social network - connect users with each other - graph algo?
+3. Machine learning - predict user result, what to study more
