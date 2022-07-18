@@ -32,14 +32,18 @@ export default function Sidebar(props) {
             <div className="sidebar-menu">
                 <h3 className="sidebar-title">Tasks</h3>
                 <ul className="sidebar-list">
+                    <Link to="/">
                     <li className={active === '/' ? "sidebar-list-item active" : "sidebar-list-item"}>
                         <AiOutlineHome className="sidebar-icon"/>
                         Home
                     </li>
-                    <li className="sidebar-list-item">
+                    </Link>
+                    <Link to="/add-task">
+                    <li className={active === '/add-task' ? "sidebar-list-item active" : "sidebar-list-item"}>
                         <GoDiffAdded className="sidebar-icon"/>
                         Add Task
                     </li>
+                    </Link>
                     <li className="sidebar-list-item">
                         <MdOutlineNextPlan className="sidebar-icon" />
                         Upcoming

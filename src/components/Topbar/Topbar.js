@@ -16,7 +16,7 @@ export default function Topbar(props) {
   return (
     <div className="home-content-topbar">
       {isOpen && <AiOutlineClose className="close-button" onClick={handleOpen}/>}
-      {isOpen && <ReactiveSidebar/>}
+      {isOpen && <ReactiveSidebar loggedIn={loggedIn} setIsOpen={setIsOpen}/>}
         <div className="topbar-wrapper">
             <div className="topbar-left">
                 <AiOutlineMenu className="menu-icon" onClick={handleOpen}/>

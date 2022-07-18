@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import convertUtcToLocal from '../../utils/dateHelpers';
+import { BsTrash } from 'react-icons/bs';
 
 function createData(name, description, date_added) {
   return {
@@ -79,16 +80,18 @@ export default function WaitingTable(props) {
                                 <TableRow key={row.name}>
                                     <TableCell component="th" scope="row" className={styles.tableCell}>
                                         <div className="task-name-container">
-                                            <div className="task-name" data-tip data-for="description-tip" onClick={()=>{
-                                                setSelectedTaskPreview(row);
-                                                setIsOpen(true);
-                                            }}>
-                                                {row.name}
-                                            </div>
+                                            {row.name}
                                         </div>
                                     </TableCell>
                                     <TableCell align="left" className={styles.tableCell}>
                                         {convertUtcToLocal(row.date_added)}
+                                    </TableCell>
+                                    <TableCell align="right" className={styles.tableCell}>
+                                        <div className="task-actions-container">
+                                            <div className="delete-action">
+                                                <BsTrash />
+                                            </div>
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             ))}

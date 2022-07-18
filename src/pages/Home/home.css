@@ -18,6 +18,14 @@ html{
     .tasks-item{
         border: hsl(210, 10%, 70%) 0.5px solid;
     }
+
+    .task-name{
+        border-bottom: white 1px solid !important;
+    }
+
+    .task-name:hover{
+        border-bottom: #00bcd4 1px solid !important;
+    }
 }   
 
 html{

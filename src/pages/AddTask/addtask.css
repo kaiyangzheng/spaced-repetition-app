@@ -1,0 +1,117 @@
+.add-task{
+    flex: 4;
+}
+
+.add-task h1{
+    margin: 0 20px;
+    text-decoration: underline;
+    text-decoration-color: #00bcd4;
+    text-decoration-thickness: 4px;
+}
+
+.add-task-container{
+    display: flex;
+    justify-content: space-between;
+    max-width: 91.3vw;
+}
+
+.add-task-form{
+    flex: 1;
+    margin: 10px 20px;
+    padding: 30px;
+    border-radius: 10px;
+    -webkit-box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    box-shadow: 0px 0px 15px -10px rgba(0, 0, 0, 0.75);
+    display: flex;
+    flex-direction: column;
+}
+
+.task-form-input{
+    margin-bottom: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.add-task-form input{
+    margin-top: 5px;
+    padding: 5px 5px;
+    box-sizing: border-box;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    font-weight: 600;
+    width: 10%;
+    min-width: 100px;
+    resize: none;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.add-task-form textarea{
+    margin-top: 5px;
+    width: 100%;
+    height: 150px;
+    padding: 12px 20px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    resize: none;
+}
+
+.input-label{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+.task-submit-container{
+    display: flex;
+    justify-content: flex-start;
+    margin-top: 20px;
+}
+
+.task-submit-btn{
+    background-color: #00bcd4;
+    color: white;
+    padding: 8px 10px;
+    border-radius: 5px;
+    border: none;
+    font-size: 0.8em;
+    cursor: pointer;
+    transition: 0.3s;
+    margin-right: 10px;
+}
+
+.task-submit-btn:hover{
+    background-color: #00acc1;
+}
+
+.add-another{
+    background-color: #EA4C89
+}
+
+.add-another:hover{
+    background-color: #D83979;
+}
+
+.alert-container{
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+.alert{
+    width: 10vw;
+    background-color: rgba(22,11,11,255) !important;
+    color: #d4abab !important;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    .add-task-form{
+        border: hsl(210, 10%, 70%) 0.5px solid;
+    }
+}
+

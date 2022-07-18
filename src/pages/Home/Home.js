@@ -12,8 +12,7 @@ import WaitingTable from '../../components/WaitingTable/WaitingTable'
 
 
 export default function Home(props) {
-  const { loggedIn } = props;
-  const [tasks, setTasks] = useState([]);
+  const { loggedIn, tasks, setTasks } = props;
   const [tasksInfo, setTasksInfo] = useState({'repetitions': 0, 'actionRequired': 0});
   // TODO: determine most improved tasks
   const [taskStats, setTaskStats] = useState({'totalTasks': 0, 'totalUnderstood': 0, 'sortedTasks': []});
@@ -52,10 +51,11 @@ export default function Home(props) {
 
   // get next task
   useEffect(()=>{
-    tasks.sort((a,b)=>{
+    let filteredTasks = tasks.filter(task=>task.prev_review_date != null);
+    filteredTasks.sort((a,b)=>{
       return new Date(a.next_review_date) - new Date(b.next_review_date);
     })
-    setNextTask(tasks[0]);
+    setNextTask(filteredTasks[0]);
   }, [tasks])
 
   // get tasks todo today
@@ -73,7 +73,7 @@ export default function Home(props) {
   useEffect(()=>{
     let waitingTasks = [];
     for (let i = 0; i < tasks.length; i++) {
-      if (tasks.prev_review_date === null) {
+      if (tasks.prev_review_date == null) {
         waitingTasks.push(tasks[i]);
       }
     }
@@ -189,7 +189,7 @@ export default function Home(props) {
           </div>
           <div className="overview-item">
             <div className="overview-item-title">
-              🗒 Next Up
+              📋 Next Up
             </div>
             {nextTask ? <div className="overview-item-content">
               <div className="item" data-tip data-for="descriptionTip" onClick={()=>setIsOpen(true)}>
@@ -212,7 +212,7 @@ export default function Home(props) {
             <div className="overview-item-title">
               📈 Statistics
             </div>
-            {tasks.length > 0 ? <div className="overview-item-content chart">
+            {tasks.filter((task)=>task.prev_review_date != null).length > 0 ? <div className="overview-item-content chart">
               <div className="item">
                 {understoodChartData && <RadialBarChart
                   width={160}
