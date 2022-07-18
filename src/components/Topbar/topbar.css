@@ -1,0 +1,80 @@
+.home-content-topbar{
+    width: 100%;
+    height: 50px;
+    background-color: white;
+    position: sticky;
+    top: 0px;
+    margin-bottom: 20px;
+    z-index: 999;
+}
+
+.topbar-wrapper{
+    height: 100%;
+    padding: 0px 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.logo-left{
+    font-size: 30px;
+    font-weight: bold;
+    color: #17408b;
+}
+
+.logo-right{
+    font-size: 30px;
+    font-weight: bold;
+    color: #c9082a;
+}
+
+.topbar-right{
+    display: flex;
+    align-items: center;
+}
+
+.username{
+    font-size: 20px;
+    font-weight: bold;
+    color: #17408b;
+    padding: 5px 10px;
+    background-color: blanchedalmond;
+    border-radius: 10px;
+    border: 1px solid #17408b;
+    cursor: pointer;
+}
+
+.menu-icon{
+    padding: 3px;
+    margin-right: 10px;
+    cursor: pointer;
+    display: none;
+}
+
+.menu-icon:hover{
+    border: 1px solid white;
+    border-radius: 20px;
+    background: lightgray;
+}
+
+.close-button{
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #17408b;
+    cursor: pointer;
+    transition: 0.3s;
+    margin: 10px 20px;
+    position: relative;
+    z-index: 1;
+}
+
+.close-button:hover{
+    color: #c9082a; 
+}
+
+@media screen and (max-width: 940px){
+    .menu-icon{
+        display: inline;
+    }
+}
+

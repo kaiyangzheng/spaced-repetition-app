@@ -1,0 +1,19 @@
+.modal-title-container{
+    display: flex;
+    flex-direction: column;
+}
+
+.modal-title-container h2, span{
+    margin-bottom: 3px;
+}
+
+.modal-stats-container{
+    display: flex;
+    justify-content: space-between;
+    color: #565656;
+    font-size: 0.8em;
+}
+
+.modal-stats-container span{
+    margin-bottom: 0px;
+}
