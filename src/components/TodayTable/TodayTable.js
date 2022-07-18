@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState } from 'react';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -9,6 +9,7 @@ import Paper from '@mui/material/Paper';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import convertUtcToLocal from '../../utils/dateHelpers';
 import { AiOutlineArrowRight } from 'react-icons/ai'
+import useMediaQuery from '@material-ui/core/useMediaQuery'
 import './todaytable.css';
 
 function createData(name, description, quality, prev_review_date) {
@@ -20,21 +21,26 @@ function createData(name, description, quality, prev_review_date) {
   };
 }
 
-let theme = "light";
-if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
-    theme = "dark";
-}
-
-const darkTheme = createTheme({
-    palette: {
-        mode: theme,
-    },
-})
-
 export default function TodayTable(props) {
     const { tasks, setSelectedTaskPreview, setIsOpen } = props;
     const [showMore, setShowMore] = useState({});
+    const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
+    const [theme, setTheme] = useState('light');
     const rows = tasks.map(task => createData(task.name, task.description, task.quality, task.prev_review_date));
+
+    useEffect(() => {
+        if (prefersDarkMode) {
+            setTheme('dark');
+        } else {
+            setTheme('light');
+        }
+    }, [prefersDarkMode]);
+
+    const darkTheme = createTheme({
+        palette: {
+            mode: theme,
+        },
+    })
 
     useEffect(()=>{
         for (let i = 0; i < tasks.length; i++){
