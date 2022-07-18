@@ -17,3 +17,10 @@
 .modal-stats-container span{
     margin-bottom: 0px;
 }
+
+@media screen and (prefers-color-scheme: dark) {
+    .task-modal{
+        background-color: rgb(51, 51, 51);
+        color: hsl(210, 10%, 70%);
+    }
+}

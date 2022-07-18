@@ -1,12 +1,11 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router'
-import { Link } from 'react-router-dom'
 import './home.css'
 import axiosInstance from '../../axiosApi'
 import TaskModal from './../../components/TaskModal/TaskModal'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { RadialBarChart, RadialBar, Legend, Tooltip } from "recharts";
-import { BarChart, Bar, Cell, XAxis, YAxis, CartesianGrid} from 'recharts';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid} from 'recharts';
 import TaskTable from './../../components/TaskTable/TaskTable'
 import TodayTable from './../../components/TodayTable/TodayTable'
 import WaitingTable from '../../components/WaitingTable/WaitingTable'

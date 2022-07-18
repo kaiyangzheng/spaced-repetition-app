@@ -1,7 +1,6 @@
 .home-content-container-reactive{
     position: absolute;
     top: 0px;
-    border-radius: 20px;
 }
 
 .home-content-container-reactive .home-content-sidebar-reactive{
@@ -11,4 +10,31 @@
     height: 100vh;
     width: 50vw;
     margin-top: 10px;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    .home-content-container-reactive{
+        background-color: rgb(51, 51, 51);
+    }
+
+    .home-content-container-reactive .home-content-sidebar-reactive{
+        flex: 1;
+        background-color: rgb(51, 51, 51);
+        position: sticky;
+        height: 100vh;
+        width: 50vw;
+        margin-top: 10px;
+    }
+
+    .sidebar-list-item{
+        color: white;
+    }
+
+    .sidebar-list-item:hover{
+        background: gray;
+    }
+    
+    .active{
+        background: gray;
+    }
 }

@@ -5,6 +5,7 @@ import { FiSettings } from 'react-icons/fi'
 import { GrLogout } from 'react-icons/gr'
 import { GoDiffAdded } from 'react-icons/go'
 import { useNavigate } from 'react-router'
+import { HiOutlineLogout } from 'react-icons/hi'
 import { Link, useLocation } from 'react-router-dom'
 import './reactivesidebar.css'
 
@@ -62,7 +63,7 @@ export default function ReactiveSidebar(props) {
                         Settings
                     </li>
                     <li className="sidebar-list-item" onClick={handleLogout}>
-                        <GrLogout className="sidebar-icon" />
+                        <HiOutlineLogout className="sidebar-icon" />
                         Logout
                     </li>
                 </ul>

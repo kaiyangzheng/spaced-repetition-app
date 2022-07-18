@@ -23,10 +23,13 @@ export default function Topbar(props) {
                 <span className="logo-left">Re</span><span className="logo-right">task</span>
             </div>
             <div className="topbar-right">
-                <span className="username">
+                {!isOpen ? <span className="username">
                   {loggedIn.loggedIn ? loggedIn.user : 
                     <Link to="/login">Login</Link>}
-                </span>
+                </span> :
+                <span className="menu-open-right">
+                  <span className="logo-left">Re</span><span className="logo-right">task</span>
+                </span>}  
             </div>
         </div>
     </div>

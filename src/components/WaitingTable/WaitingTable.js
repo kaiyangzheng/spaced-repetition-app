@@ -6,6 +6,7 @@ import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
+import { ThemeProvider, createTheme } from '@mui/material/styles';
 import convertUtcToLocal from '../../utils/dateHelpers';
 
 function createData(name, description, date_added) {
@@ -15,6 +16,12 @@ function createData(name, description, date_added) {
     date_added
   };
 }
+
+const darkTheme = createTheme({
+    palette: {
+        mode: 'dark',
+    },
+})
 
 export default function WaitingTable(props) {
     const { tasks, setSelectedTaskPreview, setIsOpen } = props;
@@ -34,47 +41,49 @@ export default function WaitingTable(props) {
         }
       });
     return <>
-    <Paper className={styles.root}>
-        <TableContainer component={Paper}>
-            <Table
-                sx={{minWidth: 650}}
-                aria-label="simple table"
-                className={styles.table}
-                >
-                    <TableHead>
-                        <TableRow>
-                            <TableCell width={'10%'} className={styles.tableCell}>
-                                Name
-                            </TableCell>
-                            <TableCell align="left" className={styles.tableCell}>
-                                Date Added
-                            </TableCell>
-                            <TableCell align="right" className={styles.tableCell}>
-                                Actions
-                            </TableCell>
-                        </TableRow>
-                    </TableHead>
-                    <TableBody>
-                        {rows.map(row => (
-                            <TableRow key={row.name}>
-                                <TableCell component="th" scope="row" className={styles.tableCell}>
-                                    <div className="task-name-container">
-                                        <div className="task-name" data-tip data-for="description-tip" onClick={()=>{
-                                            setSelectedTaskPreview(row);
-                                            setIsOpen(true);
-                                        }}>
-                                            {row.name}
-                                        </div>
-                                    </div>
+    <ThemeProvider theme={darkTheme}>
+        <Paper className={styles.root}>
+            <TableContainer component={Paper}>
+                <Table
+                    sx={{minWidth: 650}}
+                    aria-label="simple table"
+                    className={styles.table}
+                    >
+                        <TableHead>
+                            <TableRow>
+                                <TableCell width={'10%'} className={styles.tableCell}>
+                                    Name
                                 </TableCell>
                                 <TableCell align="left" className={styles.tableCell}>
-                                    {convertUtcToLocal(row.date_added)}
+                                    Date Added
+                                </TableCell>
+                                <TableCell align="right" className={styles.tableCell}>
+                                    Actions
                                 </TableCell>
                             </TableRow>
-                        ))}
-                    </TableBody>
-                </Table>
-        </TableContainer>
-        </Paper>    
+                        </TableHead>
+                        <TableBody>
+                            {rows.map(row => (
+                                <TableRow key={row.name}>
+                                    <TableCell component="th" scope="row" className={styles.tableCell}>
+                                        <div className="task-name-container">
+                                            <div className="task-name" data-tip data-for="description-tip" onClick={()=>{
+                                                setSelectedTaskPreview(row);
+                                                setIsOpen(true);
+                                            }}>
+                                                {row.name}
+                                            </div>
+                                        </div>
+                                    </TableCell>
+                                    <TableCell align="left" className={styles.tableCell}>
+                                        {convertUtcToLocal(row.date_added)}
+                                    </TableCell>
+                                </TableRow>
+                            ))}
+                        </TableBody>
+                    </Table>
+            </TableContainer>
+            </Paper>   
+    </ThemeProvider>
     </>
 }   

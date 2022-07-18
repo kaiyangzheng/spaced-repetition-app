@@ -3,11 +3,26 @@ html{
 }
 
 @media screen and (prefers-color-scheme: dark) {
-    /*
-    TODO
-    */
+    #root {
+        background-color: #1a1a1a;
+    }
+    html{
+        background-color: #1a1a1a;
+        color: hsl(210, 10%, 70%) !important;
+    }
 
+    .overview-item{
+        border: hsl(210, 10%, 70%) 0.5px solid;
+    }
+
+    .tasks-item{
+        border: hsl(210, 10%, 70%) 0.5px solid;
+    }
 }   
+
+html{
+    color: black;
+}
 
 .home{
     flex: 4;

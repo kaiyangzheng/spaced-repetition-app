@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react'
 import { AiOutlineHome, AiOutlineCalendar, AiOutlineExclamationCircle } from 'react-icons/ai'
 import { MdOutlineToday, MdOutlineNextPlan } from 'react-icons/md'
 import { FiSettings } from 'react-icons/fi'
-import { GrLogout } from 'react-icons/gr'
+import { HiOutlineLogout } from 'react-icons/hi'
 import { GoDiffAdded } from 'react-icons/go'
 import { useNavigate } from 'react-router'
 import { Link, useLocation } from 'react-router-dom'
@@ -62,7 +62,7 @@ export default function Sidebar(props) {
                         Settings
                     </li>
                     <li className="sidebar-list-item" onClick={handleLogout}>
-                        <GrLogout className="sidebar-icon" />
+                        <HiOutlineLogout className="sidebar-icon" />
                         Logout
                     </li>
                 </ul>

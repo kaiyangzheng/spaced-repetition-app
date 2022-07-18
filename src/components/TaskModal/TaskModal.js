@@ -25,6 +25,7 @@ export default function TaskModal(props) {
         onRequestClose={() => setIsOpen(false)}
         style={customStyles}
         contentLabel="Task Modal"
+        className="task-modal"
     >
         <div className="modal-title">
             <div className="modal-title-container">

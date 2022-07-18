@@ -28,6 +28,10 @@
     color: #c9082a;
 }
 
+.logo-left, .logo-right{
+    cursor: pointer;
+}
+
 .topbar-right{
     display: flex;
     align-items: center;
@@ -35,7 +39,7 @@
 
 .username{
     font-size: 20px;
-    font-weight: bold;
+    font-weight: 500;
     color: #17408b;
     padding: 5px 10px;
     background-color: blanchedalmond;
@@ -78,6 +82,35 @@
 
 .mt-20{
     margin-top: -20px;
+}
+
+.menu-open-right{
+    margin-top: -100px;
+}
+
+@media screen and (prefers-color-scheme: dark) {
+    .close-button{
+        color: white;
+    }
+
+    .home-content-topbar{
+        background-color: rgb(51, 51, 51);
+    }
+
+    .logo-left{
+        color: #0096FF;
+    }
+
+    .logo-right{
+        color: #f3172d;
+    }
+
+    .username{
+        background-color: grey;
+        color: hsl(210, 10%, 90%);
+        font-weight: 500;
+    }
+
 }
 
 @media screen and (max-width: 940px){
