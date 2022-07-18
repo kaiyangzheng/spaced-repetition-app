@@ -48,7 +48,6 @@ export default function Home(props) {
     axiosInstance.get('/tasks/api/')
     .then(response => {
       setTasks(response.data);
-      console.log(tasks);
     })
   }, [])
 
@@ -140,7 +139,6 @@ export default function Home(props) {
       }
     }
     setSortedChartData(sortedTasks);
-    console.log(tasks);
   }, [taskStats])
 
   const radialStyle = {
@@ -287,18 +285,22 @@ export default function Home(props) {
               </div>
             </div>
           </div>
-          <div className="tasks-item">
-            <div className="tasks-item-title">
-              ➕ All Added Tasks
-            </div>
-            <div className="item">
-              <div className="task-table-container">
-                {tasks &&  <TaskTable tasks={tasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen}/>}
-              </div>
-            </div>
-          </div>
         </div>
       </div>
+      <div className="tasks mt-5">
+        <div className="tasks-container">
+          <div className="tasks-item">
+                <div className="tasks-item-title">
+                  ➕ All Added Tasks
+                </div>
+                <div className="item">
+                  <div className="task-table-container">
+                    {tasks &&  <TaskTable tasks={tasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen}/>}
+                  </div>
+                </div>
+              </div>
+          </div>
+        </div>
     </div>
     <TaskModal task={nextTask} isModalOpen={isModalOpen} setIsOpen={setIsOpen}/>
     <TaskModal task={selectedTaskPreview} isModalOpen={isModalOpen} setIsOpen={setIsOpen}/>

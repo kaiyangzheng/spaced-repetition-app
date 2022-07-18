@@ -72,9 +72,30 @@
     color: #c9082a; 
 }
 
+.mt-10{
+    margin-top: -10px;
+}
+
+.mt-20{
+    margin-top: -20px;
+}
+
 @media screen and (max-width: 940px){
     .menu-icon{
         display: inline;
     }
+
+    .tasks-container{
+        max-width: 95vw;
+    }
+
+    .overview-container{
+        max-width: 95vw;
+    }
 }
 
+@media screen and (max-width: 370px){
+    .username{
+        display: none;
+    }
+}

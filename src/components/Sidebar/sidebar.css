@@ -53,4 +53,12 @@
     .home-content-container{
         display: none;
     }
+
+    .task-container{
+        max-width: 95vw;
+    }
+
+    .overview-container{
+        max-width: 95vw;
+    }
 }
