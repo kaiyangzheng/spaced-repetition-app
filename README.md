@@ -13,15 +13,6 @@ As Ebbinghaus put it:
 
 ---
 
-# Backend
-
-- [ ]  Categorize tasks - NLP Categorization
-- [ ]  User Social Network - connect users with similar tasks/interests together (graph algorithm)
-- [ ]  Predict user results, user trends
-- [ ]  Search feature ?
-
----
-
 # Frontend
 
 - [ ]  Tables for smaller screens
