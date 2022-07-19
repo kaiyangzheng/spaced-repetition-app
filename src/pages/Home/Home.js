@@ -280,7 +280,7 @@ export default function Home(props) {
             </div>
             <div className="item">
               <div className="task-table-container">
-                {waitingTasks && <WaitingTable tasks={waitingTasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen}/>}
+                {waitingTasks && <WaitingTable tasks={waitingTasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen} setTasks={setTasks}/>}
               </div>
             </div>
           </div>
@@ -294,7 +294,7 @@ export default function Home(props) {
                 </div>
                 <div className="item">
                   <div className="task-table-container">
-                    {tasks &&  <TaskTable tasks={tasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen}/>}
+                    {tasks &&  <TaskTable tasks={tasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen} setTasks={setTasks}/>}
                   </div>
                 </div>
               </div>

@@ -33,7 +33,7 @@ function App() {
           <Route path="/"  element={<Home loggedIn={loggedIn} tasks={tasks} setTasks={setTasks}/>}/>
           <Route path="/login"  element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
           <Route path="/register"  element={<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/add-task"  element={<AddTask loggedIn={loggedIn}/>}/>
+          <Route path="/add-task"  element={<AddTask loggedIn={loggedIn} tasks={tasks}/>}/>
         </Routes>
       </div>
     </Router>

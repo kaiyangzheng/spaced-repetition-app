@@ -10,6 +10,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import convertUtcToLocal from '../../utils/dateHelpers';
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { BsArrowRightSquare } from 'react-icons/bs';
 import './todaytable.css';
 
 function createData(name, description, quality, prev_review_date) {
@@ -101,6 +102,13 @@ export default function TodayTable(props) {
                                         </TableCell>    
                                         <TableCell align="left">
                                             <AiOutlineArrowRight className="task-button-icon"></AiOutlineArrowRight>
+                                        </TableCell>
+                                        <TableCell align="right">
+                                            <div className="task-actions-container">    
+                                                <div className="goto-action action">
+                                                    <BsArrowRightSquare />
+                                                </div>
+                                            </div>
                                         </TableCell>
                                     </TableRow>
                                 ))}

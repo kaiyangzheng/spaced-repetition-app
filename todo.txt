@@ -6,6 +6,8 @@ Frontend Todo:
 3. Actions in Tasks section 
     - delete
     - update 
+    - make add task save and complete, not save and add another 
+    - same note, don't go back to home page after add
     - fix dates and next up in home screen ✅
 4. Allow first review + update 
 5. Do task page 

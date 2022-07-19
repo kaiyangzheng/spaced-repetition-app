@@ -27,9 +27,9 @@ export default function Topbar(props) {
                   {loggedIn.loggedIn ? loggedIn.user : 
                     <Link to="/login">Login</Link>}
                 </span> :
-                <span className="menu-open-right">
+                <div className="menu-open-right">
                   <span className="logo-left">Re</span><span className="logo-right">task</span>
-                </span>}  
+                </div>}  
             </div>
         </div>
     </div>

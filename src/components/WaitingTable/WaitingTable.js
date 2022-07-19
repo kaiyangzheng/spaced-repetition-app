@@ -10,9 +10,13 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import convertUtcToLocal from '../../utils/dateHelpers';
 import { BsTrash } from 'react-icons/bs';
+import { BsArrowRightSquare } from 'react-icons/bs';
+import { deleteTask } from '../../utils/taskActionHelpers';
+import './waitingtable.css';
 
-function createData(name, description, date_added) {
+function createData(id, name, description, date_added) {
   return {
+    id,
     name,
     description,
     date_added
@@ -20,7 +24,8 @@ function createData(name, description, date_added) {
 }
 
 export default function WaitingTable(props) {
-    const { tasks, setSelectedTaskPreview, setIsOpen } = props;
+    const { tasks, setSelectedTaskPreview, setIsOpen, setTasks } = props;
+    const [showMore, setShowMore] = useState({})
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [theme, setTheme] = useState('light');
 
@@ -38,7 +43,13 @@ export default function WaitingTable(props) {
         },
     })
 
-    const rows = tasks.map(task => createData(task.name, task.description, task.date_added));
+    useEffect(()=>{
+        for (let i = 0; i < tasks.length; i++){
+            setShowMore({...showMore, [i+1]: false});
+        }
+    }, [tasks])
+
+    const rows = tasks.map(task => createData(task.id, task.name, task.description, task.date_added));
     const styles = theme => ({
         root: {
           display: 'flex',
@@ -64,8 +75,11 @@ export default function WaitingTable(props) {
                     >
                         <TableHead>
                             <TableRow>
-                                <TableCell width={'10%'} className={styles.tableCell}>
+                                <TableCell className={styles.tableCell}>
                                     Name
+                                </TableCell>
+                                <TableCell align="left">
+                                    Description
                                 </TableCell>
                                 <TableCell align="left" className={styles.tableCell}>
                                     Date Added
@@ -76,11 +90,16 @@ export default function WaitingTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map(row => (
+                            {rows.map((row, index) => (
                                 <TableRow key={row.name}>
                                     <TableCell component="th" scope="row" className={styles.tableCell}>
                                         <div className="task-name-container">
                                             {row.name}
+                                        </div>
+                                    </TableCell>
+                                    <TableCell align="left" width="50%">
+                                        <div className="description-container" onClick={()=>setShowMore({...showMore, [index+1]: !showMore[index+1]})}>
+                                            {!showMore[index+1] ? row.description.slice(0, 70) + "..." : row.description}
                                         </div>
                                     </TableCell>
                                     <TableCell align="left" className={styles.tableCell}>
@@ -88,8 +107,14 @@ export default function WaitingTable(props) {
                                     </TableCell>
                                     <TableCell align="right" className={styles.tableCell}>
                                         <div className="task-actions-container">
-                                            <div className="delete-action">
+                                            <div className="delete-action action" onClick={()=>{
+                                                deleteTask(row.id);
+                                                setTasks(tasks.filter(task => task.id !== row.id));
+                                            }}>
                                                 <BsTrash />
+                                            </div>
+                                            <div className="goto-action action">
+                                                <BsArrowRightSquare />
                                             </div>
                                         </div>
                                     </TableCell>

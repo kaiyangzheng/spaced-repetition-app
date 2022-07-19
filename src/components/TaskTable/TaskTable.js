@@ -7,11 +7,15 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
+import { BsTrash } from 'react-icons/bs';
+import { WiCloudRefresh } from 'react-icons/wi';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import convertUtcToLocal from '../../utils/dateHelpers';
+import { deleteTask } from '../../utils/taskActionHelpers';
 
-function createData(name, description, quality, ease_factor, repetitions, prev_review_date, next_review_date, date_added) {
+function createData(id, name, description, quality, ease_factor, repetitions, prev_review_date, next_review_date, date_added) {
   return {
+    id,
     name,
     description,
     quality,
@@ -24,8 +28,8 @@ function createData(name, description, quality, ease_factor, repetitions, prev_r
 }
 
 export default function TaskTable(props) {
-    const { tasks, setSelectedTaskPreview, setIsOpen } = props;
-    const rows = tasks.map(task => createData(task.name, task.description, task.quality, task.ease_factor, task.repetitions, task.prev_review_date, task.next_review_date, task.date_added));
+    const { tasks, setSelectedTaskPreview, setIsOpen, setTasks } = props;
+    const rows = tasks.map(task => createData(task.id, task.name, task.description, task.quality, task.ease_factor, task.repetitions, task.prev_review_date, task.next_review_date, task.date_added));
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [theme, setTheme] = useState('light');
 
@@ -124,6 +128,19 @@ export default function TaskTable(props) {
                                     </TableCell>
                                     <TableCell align="left" className={styles.tableCell}>
                                         {convertUtcToLocal(row.date_added)}
+                                    </TableCell>
+                                    <TableCell align="right" className={styles.tableCell}>
+                                        <div className="task-actions-container">
+                                            <div className="delete-action action" onClick={()=>{
+                                                deleteTask(row.id);
+                                                setTasks(tasks.filter(task => task.id !== row.id));
+                                            }}>
+                                                <BsTrash />
+                                            </div>
+                                            <div className="update-action action">
+                                                <WiCloudRefresh/>
+                                            </div>
+                                        </div>
                                     </TableCell>
                                 </TableRow>
                             ))}
