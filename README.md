@@ -15,12 +15,13 @@ As Ebbinghaus put it:
 
 # Frontend
 
-- [ ]  Tables for smaller screens
-    - [ ]  mobile stats section
-- [ ]  Refine add task page
-    - [ ]  Make “Save and add Another” button to “Save and complete initial task”
-    - [ ]  Don’t go to home page after saving
-- [ ]  Modal for first review
+- [x]  Tables for smaller screens
+    - [x]  mobile stats section
+- [x]  Refine add task page
+    - [x]  Make “Save and add Another” button to “Save and complete initial task”
+    - [x]  Don’t go to home page after saving
+- [x]  Modal for first review
+- [ ]  Loading bar
 - [ ]  Task page - Title, description, stats, option to do task when day comes
 - [ ]  Upcoming tasks
 - [ ]  Calendar
