@@ -1,17 +1,18 @@
 import React, {useState, useEffect} from 'react'
 import { useNavigate } from 'react-router';
+import { useLocation } from 'react-router';
 import Alert from '@mui/material/Alert';
 import { AlertTitle } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import axiosInstance from '../../axiosApi';
-import convertUtcToLocal from '../../utils/dateHelpers';
+import { convertUtcToLocal } from '../../utils/dateHelpers';
 import IntiateTaskModal from '../../components/InitiateTaskModal/InitiateTaskModal';
 import './addtask.css';
 
 const delay = 3;
 
 export default function AddTask(props) {
-  const {loggedIn, tasks, setTasks, waitingTasks, setWaitingTasks} = props;
+  const {loggedIn, tasks, setTasks, waitingTasks, setWaitingTasks, setProgress, setLocation} = props;
   const navigate = useNavigate();
   const [task, setTask] = useState({
     'name': '',
@@ -23,6 +24,11 @@ export default function AddTask(props) {
   const [completeTask, setCompleteTask] = useState(false);
   const [selectedTask, setSelectedTask] = useState(null);
   const [showModal, setShowModal] = useState(false);
+  const loc = useLocation();
+
+  useEffect(() => {
+    setLocation(loc);
+  }, [])
   
   // check if user is logged in
   useEffect(()=>{
@@ -35,6 +41,7 @@ export default function AddTask(props) {
   // save tasks to backend
   const handleSave = (e) => {
     e.preventDefault();
+    setProgress(20);
     setTask({...task, 'name': task.name.trim(), 'description': task.description.trim()});
     axiosInstance.post('/tasks/api/', task)
     .then(res => {
@@ -44,10 +51,10 @@ export default function AddTask(props) {
       })
       setTasks([...tasks, res.data]);
       if (completeTask){
-        console.log('hi');
         setSelectedTask(res.data);
         setShowModal(true);
       }
+      setProgress(100);
     })
     .catch(err => {
       console.log(err);
@@ -57,6 +64,7 @@ export default function AddTask(props) {
         errorMessage[key] = errors[key][0];
       }
       setErrorMessage(errorMessage);
+      setProgress(100)
     })
   }
 
@@ -117,7 +125,7 @@ export default function AddTask(props) {
         <div className="history">
           <h1>History</h1>
           <div className="history-container">
-            <div className="history-item">
+            {sortedTasks.length > 0 ? <div className="history-item">
               {sortedTasks?.map((task, index)=>{
                 return <div key={index} className="history-item-container">
                   <div className="history-item-name">
@@ -128,10 +136,15 @@ export default function AddTask(props) {
                   </div>
                 </div>
               })}
-            </div>
+            </div>:
+            <div className="history-item">
+              <div className="history-item-name">
+                <strong>No tasks added</strong>
+              </div>
+            </div>}
           </div>
         </div>
     </div>
-    <IntiateTaskModal isModalOpen={showModal} setIsModalOpen={setShowModal} selectedInitiateTask={selectedTask} setSelectedInitiateTask={setSelectedTask} waitingTasks={waitingTasks} setWaitingTasks={setWaitingTasks} tasks={tasks} setTasks={setTasks}/>
+    <IntiateTaskModal isModalOpen={showModal} setIsModalOpen={setShowModal} selectedInitiateTask={selectedTask} setSelectedInitiateTask={setSelectedTask} waitingTasks={waitingTasks} setWaitingTasks={setWaitingTasks} tasks={tasks} setTasks={setTasks} setProgress={setProgress}/>
   </>
 }

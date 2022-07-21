@@ -10,7 +10,7 @@ import { ThemeProvider, createTheme } from '@mui/material/styles';
 import { BsTrash } from 'react-icons/bs';
 import { WiCloudRefresh } from 'react-icons/wi';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import convertUtcToLocal from '../../utils/dateHelpers';
+import  { convertUtcToLocal } from '../../utils/dateHelpers';
 import { deleteTask } from '../../utils/taskActionHelpers';
 
 function createData(id, name, description, quality, ease_factor, repetitions, prev_review_date, next_review_date, date_added) {
@@ -115,7 +115,7 @@ export default function TaskTable(props) {
                                         {row.quality}
                                     </TableCell>
                                     <TableCell align="left" className={styles.tableCell}>
-                                        {row.ease_factor}
+                                        {Math.round(row.ease_factor*10)/10}
                                     </TableCell>
                                     <TableCell align="left" className={styles.tableCell}>
                                         {row.repetitions}

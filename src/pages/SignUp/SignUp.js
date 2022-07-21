@@ -5,7 +5,7 @@ import './signup.css'
 import axiosInstance from '../../axiosApi'
 
 export default function Login(props) {
-  const { setLoggedIn } = props;
+  const { setLoggedIn, setProgress } = props;
   const [user, setUser] = useState({"username": "", "email": "", "password": ""})
   const navigate = useNavigate();
 
@@ -23,6 +23,7 @@ export default function Login(props) {
 
   const handleRegister = async (e) => {
     e.preventDefault();
+    setProgress(20);
     let response = await axiosInstance.post('/api/user/create/', user)
     console.log(response)
     response = await axiosInstance.post('/api/token/obtain/', user)
@@ -33,6 +34,7 @@ export default function Login(props) {
     localStorage.setItem('access_token', response.data.access)
     localStorage.setItem('refresh_token', response.data.refresh)
     setLoggedIn({loggedIn: true, user: user['username'], token: response.data.access})
+    setProgress(100);
     navigate('/')
   }
 

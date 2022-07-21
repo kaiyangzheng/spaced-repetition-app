@@ -2,7 +2,7 @@ import React, {useState, useEffect} from 'react'
 import Modal from 'react-modal';
 import './taskmodal.css'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import convertUtcToLocal from '../../utils/dateHelpers';
+import { convertUtcToLocal } from '../../utils/dateHelpers';
 
 const customStyles = {
     content: {
@@ -15,8 +15,8 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         transform: 'translate(-50%, -50%)',
-        minWidth: '20%',
-        maxWidth: '50%',
+        minWidth: '30%',
+        maxWidth: '70%',
         border: '1px solid #ccc',
         backgroundColor: '#fff',
         borderRadius: '4px',
@@ -43,8 +43,8 @@ const customStylesDark = {
         right: 'auto',
         bottom: 'auto',
         transform: 'translate(-50%, -50%)',
-        minWidth: '20%',
-        maxWidth: '50%',
+        minWidth: '30%',
+        maxWidth: '70%',
         border: '1px solid #ccc',
         backgroundColor: '#1a1a1a',
         borderRadius: '4px',

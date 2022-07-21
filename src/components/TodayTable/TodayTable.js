@@ -7,7 +7,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
-import convertUtcToLocal from '../../utils/dateHelpers';
+import { convertUtcToLocal } from '../../utils/dateHelpers';
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
 import { BsArrowRightSquare } from 'react-icons/bs';

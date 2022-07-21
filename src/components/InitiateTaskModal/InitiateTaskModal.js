@@ -1,10 +1,9 @@
 import React, {useState, useEffect} from 'react'
 import Modal from 'react-modal';
 import useMediaQuery from '@material-ui/core/useMediaQuery';
-import convertUtcToLocal from '../../utils/dateHelpers';
+import { convertUtcToLocal } from '../../utils/dateHelpers';
 import axiosInstance from '../../axiosApi';
-import './initiatetaskmodal.css'
-import axios from 'axios';
+import './initiatetaskmodal.css';
 
 const customStyles = {
     content: {
@@ -64,7 +63,7 @@ const customStylesDark = {
 Modal.setAppElement('#root')
 
 export default function IntiateTaskModal(props) {
-    const { selectedInitiateTask, setSelectedInitiateTask, isModalOpen, setIsModalOpen, tasks, setTasks, setWaitingTasks, waitingTasks} = props;
+    const { selectedInitiateTask, setSelectedInitiateTask, isModalOpen, setIsModalOpen, tasks, setTasks, setWaitingTasks, waitingTasks, setProgress} = props;
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [theme, setTheme] = useState('light');
     const [qualityValue, setQualityValue] = useState(-1);
@@ -80,6 +79,7 @@ export default function IntiateTaskModal(props) {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        setProgress(20);
         axiosInstance.put(`/tasks/api/${selectedInitiateTask?.id}/`, {
             quality: qualityValue,
         })
@@ -97,13 +97,14 @@ export default function IntiateTaskModal(props) {
             let newWaitingTasks = waitingTasks.filter(task => task.id !== updatedTask.id);
             setWaitingTasks(newWaitingTasks);
             setFinishedTask(true);
+            setProgress(100);
         })
     }
 
     return <>
         <Modal
             isOpen={isModalOpen}
-            onRequestClose={() => setIsModalOpen(false)}
+            onRequestClose={() => {setIsModalOpen(false); setFinishedTask(false);}}
             style={theme === 'dark' ? customStylesDark : customStyles}
         >
             {!finishedTask ? <div className="modal-title">
@@ -139,7 +140,9 @@ export default function IntiateTaskModal(props) {
                     <div className="results-container">
                         Next review date: {convertUtcToLocal(selectedInitiateTask?.next_review_date)}
                     </div>
-                    
+                    <div className="return">
+                        <button className="return-button" onClick={()=>{setIsModalOpen(false); setFinishedTask(false);}}>Return</button>
+                    </div>
                 </div>
             </div>}
         </Modal>
