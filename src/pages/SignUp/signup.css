@@ -2,14 +2,16 @@
     margin: auto;
     width: 100%;
     max-width: 400px;
+    max-height: 575px;
     position: absolute;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
   }
   
-  .login{
+  .signup{
       min-height: 300px; 
+      max-height: 575px;
       padding: 30px 30px 0px 30px;
       border-radius: 10px;
       box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
@@ -81,5 +83,28 @@
         box-shadow: none;
       }
     }
+
+    @media screen and (prefers-color-scheme: dark) {
+      .signup{
+        background-color: #000000 !important;
+        border:hsl(210, 10%, 70%) 1px solid;
+        color: white;
+      }
+
+      .group button{
+        background-color: gray !important;
+        color: hsl(210, 10%, 70%)
+      }
+
+      .group input{
+        background-color: white
+      }
+
+      .group label{
+        color: hsl(210, 10%, 70%) !important;
+      }
+  }
+  
+
     
   

@@ -11,6 +11,7 @@
 
 .login{
     min-height: 300px; 
+    max-height: 500px;
     padding: 30px 30px 0px 30px;
     border-radius: 10px;
     box-shadow: 0px 0px 15px rgba(0,0,0,0.1);
@@ -86,6 +87,7 @@
   @media screen and (prefers-color-scheme: dark) {
       .login{
         background-color: #000000 !important;
+        border:hsl(210, 10%, 70%) 1px solid;
         color: white;
       }
 

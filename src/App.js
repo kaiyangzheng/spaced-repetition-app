@@ -12,10 +12,12 @@ import Login from './pages/Login/Login';
 import Home from './pages/Home/Home';
 import SignUp from './pages/SignUp/SignUp';
 import AddTask from './pages/AddTask/AddTask';
+import axiosInstance from './axiosApi';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState({loggedIn: false, user: {}, token: ""});
   const [tasks, setTasks] = useState([]);
+  const [waitingTasks, setWaitingTasks] = useState([]);
 
   // get login status from localStorage
   useEffect(()=>{
@@ -24,16 +26,38 @@ function App() {
     }
   }, [])
   
+  // get all tasks
+  useEffect(() => {
+    axiosInstance.get('/tasks/api/')
+    .then(response => {
+      setTasks(response.data);
+    })
+    .catch(error => {
+      console.log(error);
+    })
+  }, [])
+
+    // get tasks waiting to be reviewed
+    useEffect(()=>{
+      let waitingTasks = [];
+      for (let i = 0; i < tasks.length; i++) {
+        if (tasks[i]?.prev_review_date == null) {
+          waitingTasks.push(tasks[i]);
+        }
+      }
+      setWaitingTasks(waitingTasks);
+    }, [tasks])
+  
   return <>
     <Router>
       <Topbar loggedIn={loggedIn}/>
       <div className="container">
         <Sidebar setLoggedIn={setLoggedIn}/>
         <Routes>
-          <Route path="/"  element={<Home loggedIn={loggedIn} tasks={tasks} setTasks={setTasks}/>}/>
-          <Route path="/login"  element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
+          <Route path="/"  element={<Home loggedIn={loggedIn} tasks={tasks} setTasks={setTasks} waitingTasks={waitingTasks} setWaitingTasks={setWaitingTasks}/>}/>
+          <Route path="/login"  element={<Login loggedIn={loggedIn} setLoggedIn={setLoggedIn} />}/>
           <Route path="/register"  element={<SignUp loggedIn={loggedIn} setLoggedIn={setLoggedIn}/>}/>
-          <Route path="/add-task"  element={<AddTask loggedIn={loggedIn} tasks={tasks}/>}/>
+          <Route path="/add-task"  element={<AddTask loggedIn={loggedIn} tasks={tasks} setTasks={setTasks} waitingTasks={waitingTasks} setWaitingTasks={setWaitingTasks}/>} />
         </Routes>
       </div>
     </Router>

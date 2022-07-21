@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react'
 import { useNavigate } from 'react-router'
 import './home.css'
-import axiosInstance from '../../axiosApi'
 import TaskModal from './../../components/TaskModal/TaskModal'
 import { AiOutlineArrowRight } from 'react-icons/ai'
 import { RadialBarChart, RadialBar, Legend, Tooltip } from "recharts";
@@ -12,7 +11,7 @@ import WaitingTable from '../../components/WaitingTable/WaitingTable'
 
 
 export default function Home(props) {
-  const { loggedIn, tasks, setTasks } = props;
+  const { loggedIn, tasks, setTasks, waitingTasks, setWaitingTasks} = props;
   const [tasksInfo, setTasksInfo] = useState({'repetitions': 0, 'actionRequired': 0});
   // TODO: determine most improved tasks
   const [taskStats, setTaskStats] = useState({'totalTasks': 0, 'totalUnderstood': 0, 'sortedTasks': []});
@@ -20,7 +19,6 @@ export default function Home(props) {
   const [sortedChartData, setSortedChartData] = useState([]);
   const [nextTask, setNextTask] = useState({});
   const [todayTasks, setTodayTasks] = useState([]);
-  const [waitingTasks, setWaitingTasks] = useState([]);
   const [selectedTaskPreview, setSelectedTaskPreview] = useState({});
   const [isModalOpen, setIsOpen] = useState(false);
   const navigate = useNavigate();
@@ -41,19 +39,11 @@ export default function Home(props) {
     }
   }, [])
 
-  // get all tasks
-  useEffect(() => {
-    axiosInstance.get('/tasks/api/')
-    .then(response => {
-      setTasks(response.data);
-    })
-  }, [])
-
   // get next task
   useEffect(()=>{
-    let filteredTasks = tasks.filter(task=>task.prev_review_date != null);
+    let filteredTasks = tasks.filter(task=>task?.prev_review_date != null);
     filteredTasks.sort((a,b)=>{
-      return new Date(a.next_review_date) - new Date(b.next_review_date);
+      return new Date(a?.next_review_date) - new Date(b?.next_review_date);
     })
     setNextTask(filteredTasks[0]);
   }, [tasks])
@@ -63,22 +53,11 @@ export default function Home(props) {
     let today = new Date();
     today = convertUtcToLocal(today);
     let todayTasks = tasks.filter(task => {
-      let next_review_date = convertUtcToLocal(task.next_review_date);
+      let next_review_date = convertUtcToLocal(task?.next_review_date);
       return next_review_date === today;
     })
     setTodayTasks(todayTasks);
   }, [tasks])    
-
-  // get tasks waiting to be reviewed
-  useEffect(()=>{
-    let waitingTasks = [];
-    for (let i = 0; i < tasks.length; i++) {
-      if (tasks.prev_review_date == null) {
-        waitingTasks.push(tasks[i]);
-      }
-    }
-    setWaitingTasks(waitingTasks);
-  }, [tasks])
 
   // get task info 
   useEffect(()=>{
@@ -86,8 +65,8 @@ export default function Home(props) {
     let actionRequired = 0;
     for (let task in tasks){
       let taskData = tasks[task];
-      repetitions += taskData.repetitions;
-      if(taskData.next_review_date == null){
+      repetitions += taskData?.repetitions;
+      if(taskData?.next_review_date == null){
         actionRequired += 1;
       }
     }
@@ -102,7 +81,7 @@ export default function Home(props) {
     for (let task in tasks){
       let taskData = tasks[task];
       totalTasks += 1;
-      if (taskData.quality >= 3){
+      if (taskData?.quality >= 3){
         totalUnderstood += 1;
       }
     }
@@ -130,7 +109,7 @@ export default function Home(props) {
     let sortedTasks = [];
     for (let task in taskStats['sortedTasks']){
       let taskData = taskStats['sortedTasks'][task];
-      if (taskData.prev_review_date != null){
+      if (taskData?.prev_review_date != null){
         sortedTasks.push({
           name: taskData.name,
           ease_factor: taskData.ease_factor,
@@ -177,13 +156,13 @@ export default function Home(props) {
             </div>
             <div className="overview-item-content">
               <div className="item">
-                {tasks.length} <span className="description">Tasks Added</span>
+                {tasks?.length} <span className="description">Tasks Added</span>
               </div>
               <div className="item">
-                {tasksInfo.repetitions} <span className="description">Total Repetitions</span>
+                {tasksInfo?.repetitions} <span className="description">Total Repetitions</span>
               </div>
               <div className="item">
-                {tasksInfo.actionRequired} <span className="description">Tasks Waiting</span>
+                {tasksInfo?.actionRequired} <span className="description">Tasks Waiting</span>
               </div>
             </div>
           </div>
@@ -212,7 +191,8 @@ export default function Home(props) {
             <div className="overview-item-title">
               📈 Statistics
             </div>
-            {tasks.filter((task)=>task.prev_review_date != null).length > 0 ? <div className="overview-item-content chart">
+            {tasks.filter((task)=>task?.prev_review_date != null).length > 0 ? 
+            <div className="overview-item-content chart">
               <div className="item">
                 {understoodChartData && <RadialBarChart
                   width={160}
@@ -270,7 +250,7 @@ export default function Home(props) {
             </div>
             <div className="item">
               <div className="task-table-container">
-                {todayTasks && <TodayTable tasks={todayTasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen}/>}
+                {todayTasks && <TodayTable tasks={todayTasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen} setTasks={setTasks}/>}
               </div>
             </div>
           </div>
@@ -280,7 +260,7 @@ export default function Home(props) {
             </div>
             <div className="item">
               <div className="task-table-container">
-                {waitingTasks && <WaitingTable tasks={waitingTasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen} setTasks={setTasks}/>}
+                {waitingTasks && <WaitingTable tasks={tasks} setSelectedTaskPreview={setSelectedTaskPreview} setIsOpen={setIsOpen} setTasks={setTasks} setWaitingTasks={setWaitingTasks} waitingTasks={waitingTasks}/>}
               </div>
             </div>
           </div>

@@ -24,8 +24,11 @@ export default function Topbar(props) {
             </div>
             <div className="topbar-right">
                 {!isOpen ? <span className="username">
-                  {loggedIn.loggedIn ? loggedIn.user : 
-                    <Link to="/login">Login</Link>}
+                  {!loggedIn.loggedIn &&
+                    <Link to="/login" className="login-bar">Login</Link>} 
+                  {loggedIn.loggedIn &&
+                      loggedIn.user}
+
                 </span> :
                 <div className="menu-open-right">
                   <span className="logo-left">Re</span><span className="logo-right">task</span>

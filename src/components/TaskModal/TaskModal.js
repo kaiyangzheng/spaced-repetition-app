@@ -15,7 +15,8 @@ const customStyles = {
         right: 'auto',
         bottom: 'auto',
         transform: 'translate(-50%, -50%)',
-        width: '50%',
+        minWidth: '20%',
+        maxWidth: '50%',
         border: '1px solid #ccc',
         backgroundColor: '#fff',
         borderRadius: '4px',
@@ -25,6 +26,10 @@ const customStyles = {
         zIndex: '9999',
         position: 'fixed',
     },
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    }
+      
 }
 
 const customStylesDark = {
@@ -38,7 +43,8 @@ const customStylesDark = {
         right: 'auto',
         bottom: 'auto',
         transform: 'translate(-50%, -50%)',
-        width: '50%',
+        minWidth: '20%',
+        maxWidth: '50%',
         border: '1px solid #ccc',
         backgroundColor: '#1a1a1a',
         borderRadius: '4px',
@@ -48,6 +54,9 @@ const customStylesDark = {
         zIndex: '9999',
         position: 'fixed',
     },
+    overlay: {
+        backgroundColor: 'rgba(0, 0, 0, 0.5)',
+    }
 }
 
 Modal.setAppElement('#root')

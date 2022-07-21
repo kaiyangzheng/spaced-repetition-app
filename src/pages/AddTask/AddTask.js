@@ -5,21 +5,24 @@ import { AlertTitle } from '@mui/material';
 import Slide from '@mui/material/Slide';
 import axiosInstance from '../../axiosApi';
 import convertUtcToLocal from '../../utils/dateHelpers';
+import IntiateTaskModal from '../../components/InitiateTaskModal/InitiateTaskModal';
 import './addtask.css';
 
 const delay = 3;
 
 export default function AddTask(props) {
-  const {loggedIn, tasks} = props;
+  const {loggedIn, tasks, setTasks, waitingTasks, setWaitingTasks} = props;
   const navigate = useNavigate();
   const [task, setTask] = useState({
     'name': '',
     'description': '',
   })
   const [sortedTasks, setSortedTasks] = useState([]);
-  const [goToHome, setGoToHome] = useState(false);
   const [showError, setShowError] = useState(false);
   const [errorMessage, setErrorMessage] = useState({});
+  const [completeTask, setCompleteTask] = useState(false);
+  const [selectedTask, setSelectedTask] = useState(null);
+  const [showModal, setShowModal] = useState(false);
   
   // check if user is logged in
   useEffect(()=>{
@@ -32,15 +35,18 @@ export default function AddTask(props) {
   // save tasks to backend
   const handleSave = (e) => {
     e.preventDefault();
+    setTask({...task, 'name': task.name.trim(), 'description': task.description.trim()});
     axiosInstance.post('/tasks/api/', task)
     .then(res => {
-      console.log(res);
       setTask({
         'name': '',
         'description': '',
       })
-      if (goToHome) {
-        navigate('/');
+      setTasks([...tasks, res.data]);
+      if (completeTask){
+        console.log('hi');
+        setSelectedTask(res.data);
+        setShowModal(true);
       }
     })
     .catch(err => {
@@ -51,15 +57,21 @@ export default function AddTask(props) {
         errorMessage[key] = errors[key][0];
       }
       setErrorMessage(errorMessage);
-      setShowError(true);
-      let timer = setTimeout(()=>setShowError(false), delay * 1000);
-      return () => clearTimeout(timer);
     })
   }
 
+  useEffect(()=>{
+    if (Object.keys(errorMessage).length > 0) {
+      setShowError(true);
+      let timer = setTimeout(()=>setShowError(false), delay * 1000);
+      return () => clearTimeout(timer);
+    }
+  }, [errorMessage])
+
   // sort tasks by date added 
   useEffect(()=>{ 
-    let sortedTasks = tasks.sort((a, b) => {
+    console.log(tasks);
+    let sortedTasks = tasks?.sort((a, b) => {
       return new Date(b.date_added) - new Date(a.date_added);
     })
     setSortedTasks(sortedTasks);
@@ -80,10 +92,10 @@ export default function AddTask(props) {
                 <textarea type="text" id="task-description" name="task-description" value={task['description']} onChange={(e)=>setTask({...task, 'description': e.target.value})}/>
               </div>
               <div className="task-submit-container">
-                <button type="submit" className="task-submit-btn add-another">
-                  Save and Add Another
+                <button type="submit" className="task-submit-btn add-another"  onClick={()=>setCompleteTask(true)}>
+                  Save and Complete Task
                 </button>
-                <button type="submit" className="task-submit-btn" onClick={()=>setGoToHome(true)}>
+                <button type="submit" className="task-submit-btn">
                   Save
                 </button>
             </div>
@@ -120,5 +132,6 @@ export default function AddTask(props) {
           </div>
         </div>
     </div>
+    <IntiateTaskModal isModalOpen={showModal} setIsModalOpen={setShowModal} selectedInitiateTask={selectedTask} setSelectedInitiateTask={setSelectedTask} waitingTasks={waitingTasks} setWaitingTasks={setWaitingTasks} tasks={tasks} setTasks={setTasks}/>
   </>
 }

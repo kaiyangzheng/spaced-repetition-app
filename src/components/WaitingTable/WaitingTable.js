@@ -12,6 +12,7 @@ import convertUtcToLocal from '../../utils/dateHelpers';
 import { BsTrash } from 'react-icons/bs';
 import { BsArrowRightSquare } from 'react-icons/bs';
 import { deleteTask } from '../../utils/taskActionHelpers';
+import InitiateTaskModal from '../InitiateTaskModal/InitiateTaskModal';
 import './waitingtable.css';
 
 function createData(id, name, description, date_added) {
@@ -24,10 +25,12 @@ function createData(id, name, description, date_added) {
 }
 
 export default function WaitingTable(props) {
-    const { tasks, setSelectedTaskPreview, setIsOpen, setTasks } = props;
-    const [showMore, setShowMore] = useState({})
+    const { tasks, setSelectedTaskPreview, setIsOpen, setTasks, setWaitingTasks, waitingTasks} = props;
+    const [showMore, setShowMore] = useState({});
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [theme, setTheme] = useState('light');
+    const [selectedInitiateTask, setSelectedInitiateTask] = useState(null);
+    const [isInitiateTaskModalOpen, setIsInitiateTaskModalOpen] = useState(false);
 
     useEffect(() => {
         if (prefersDarkMode) {
@@ -44,12 +47,12 @@ export default function WaitingTable(props) {
     })
 
     useEffect(()=>{
-        for (let i = 0; i < tasks.length; i++){
+        for (let i = 0; i < waitingTasks.length; i++){
             setShowMore({...showMore, [i+1]: false});
         }
-    }, [tasks])
+    }, [waitingTasks])
 
-    const rows = tasks.map(task => createData(task.id, task.name, task.description, task.date_added));
+    const rows = waitingTasks.map(task => createData(task?.id, task?.name, task?.description, task?.date_added));
     const styles = theme => ({
         root: {
           display: 'flex',
@@ -90,30 +93,33 @@ export default function WaitingTable(props) {
                             </TableRow>
                         </TableHead>
                         <TableBody>
-                            {rows.map((row, index) => (
-                                <TableRow key={row.name}>
+                            {rows?.map((row, index) => (
+                                <TableRow key={row?.name}>
                                     <TableCell component="th" scope="row" className={styles.tableCell}>
                                         <div className="task-name-container">
-                                            {row.name}
+                                            {row?.name}
                                         </div>
                                     </TableCell>
                                     <TableCell align="left" width="50%">
                                         <div className="description-container" onClick={()=>setShowMore({...showMore, [index+1]: !showMore[index+1]})}>
-                                            {!showMore[index+1] ? row.description.slice(0, 70) + "..." : row.description}
+                                            {!showMore[index+1] ? row?.description?.slice(0, 70) + "..." : row?.description}
                                         </div>
                                     </TableCell>
                                     <TableCell align="left" className={styles.tableCell}>
-                                        {convertUtcToLocal(row.date_added)}
+                                        {convertUtcToLocal(row?.date_added)}
                                     </TableCell>
                                     <TableCell align="right" className={styles.tableCell}>
                                         <div className="task-actions-container">
                                             <div className="delete-action action" onClick={()=>{
-                                                deleteTask(row.id);
-                                                setTasks(tasks.filter(task => task.id !== row.id));
+                                                deleteTask(row?.id);
+                                                setTasks(tasks.filter(task => task?.id !== row.id));
                                             }}>
                                                 <BsTrash />
                                             </div>
-                                            <div className="goto-action action">
+                                            <div className="goto-action action" onClick={()=>{
+                                                setSelectedInitiateTask(tasks.filter(task => task?.id === row?.id)[0]);
+                                                setIsInitiateTaskModalOpen(true);
+                                            }}>
                                                 <BsArrowRightSquare />
                                             </div>
                                         </div>
@@ -125,5 +131,6 @@ export default function WaitingTable(props) {
             </TableContainer>
             </Paper>   
     </ThemeProvider>
+    <InitiateTaskModal isModalOpen={isInitiateTaskModalOpen} setIsModalOpen={setIsInitiateTaskModalOpen} selectedInitiateTask={selectedInitiateTask} setSelectedInitiateTask={setSelectedInitiateTask} tasks={tasks} setTasks={setTasks} setWaitingTasks={setWaitingTasks} waitingTasks={waitingTasks}/>
     </>
 }   

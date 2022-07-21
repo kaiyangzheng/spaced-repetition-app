@@ -38,7 +38,7 @@ export default function Login(props) {
 
   return (  
     <div className="login-container">
-      <div className="login">
+      <div className="signup">
         <form>
           <div className="group head">
             <h1>Welcome!</h1>

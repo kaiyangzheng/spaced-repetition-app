@@ -66,6 +66,7 @@
 @media screen and (prefers-color-scheme: dark){
     .home-content-sidebar{
         background-color: rgb(51, 51, 51);
+        border: hsl(210, 10%, 70%) 1px solid;
     }
 
     .sidebar-list-item{

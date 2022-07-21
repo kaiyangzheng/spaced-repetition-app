@@ -104,7 +104,7 @@
 }
 
 .alert{
-    width: 20vw;
+    width: 50vw;
     background-color: rgba(22,11,11,255) !important;
     color: #d4abab !important;
 }
@@ -137,7 +137,7 @@
     display: flex;
     justify-content: space-between;
     margin-bottom: 10px;
-    padding: 5px 0px;
+    padding: 5px 0px;   
     border-bottom:rgba(0, 0, 0, 0.75) 1px solid;
 }
 

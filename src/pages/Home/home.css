@@ -79,6 +79,9 @@ html{
     justify-content: space-between;
     align-items: center;
 }
+.chart{
+    justify-content: space-around;
+}
 
 .description{
     color: gray;

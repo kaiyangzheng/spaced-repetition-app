@@ -29,7 +29,7 @@ function createData(id, name, description, quality, ease_factor, repetitions, pr
 
 export default function TaskTable(props) {
     const { tasks, setSelectedTaskPreview, setIsOpen, setTasks } = props;
-    const rows = tasks.map(task => createData(task.id, task.name, task.description, task.quality, task.ease_factor, task.repetitions, task.prev_review_date, task.next_review_date, task.date_added));
+    const rows = tasks.map(task => createData(task?.id, task?.name, task?.description, task?.quality, task?.ease_factor, task?.repetitions, task?.prev_review_date, task?.next_review_date, task?.date_added));
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [theme, setTheme] = useState('light');
 

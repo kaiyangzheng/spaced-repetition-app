@@ -9,3 +9,13 @@ export function deleteTask(id){
         console.log(err);
     })
 }
+
+export async function updateTask(id, data){
+    await axiosInstance.put(`/tasks/api/${id}/`, data)
+    .then(res => {
+        return res.data;
+    })
+    .catch(err => {
+        console.log(err);
+    })
+}
