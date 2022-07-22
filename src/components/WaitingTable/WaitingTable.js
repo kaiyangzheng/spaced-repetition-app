@@ -8,7 +8,7 @@ import TableRow from '@mui/material/TableRow';
 import Paper from '@mui/material/Paper';
 import { ThemeProvider, createTheme } from '@mui/material/styles';
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import convertUtcToLocal from '../../utils/dateHelpers';
+import { convertUtcToLocal } from '../../utils/dateHelpers';
 import { BsTrash } from 'react-icons/bs';
 import { BsArrowRightSquare } from 'react-icons/bs';
 import { deleteTask } from '../../utils/taskActionHelpers';
@@ -25,7 +25,7 @@ function createData(id, name, description, date_added) {
 }
 
 export default function WaitingTable(props) {
-    const { tasks, setSelectedTaskPreview, setIsOpen, setTasks, setWaitingTasks, waitingTasks} = props;
+    const { tasks, setSelectedTaskPreview, setIsOpen, setTasks, setWaitingTasks, waitingTasks, setProgress} = props;
     const [showMore, setShowMore] = useState({});
     const prefersDarkMode = useMediaQuery("(prefers-color-scheme: dark)");
     const [theme, setTheme] = useState('light');
@@ -131,6 +131,6 @@ export default function WaitingTable(props) {
             </TableContainer>
             </Paper>   
     </ThemeProvider>
-    <InitiateTaskModal isModalOpen={isInitiateTaskModalOpen} setIsModalOpen={setIsInitiateTaskModalOpen} selectedInitiateTask={selectedInitiateTask} setSelectedInitiateTask={setSelectedInitiateTask} tasks={tasks} setTasks={setTasks} setWaitingTasks={setWaitingTasks} waitingTasks={waitingTasks}/>
+    <InitiateTaskModal isModalOpen={isInitiateTaskModalOpen} setIsModalOpen={setIsInitiateTaskModalOpen} selectedInitiateTask={selectedInitiateTask} setSelectedInitiateTask={setSelectedInitiateTask} tasks={tasks} setTasks={setTasks} setWaitingTasks={setWaitingTasks} waitingTasks={waitingTasks} setProgress={setProgress}/>
     </>
 }   

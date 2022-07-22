@@ -5,7 +5,7 @@ import './login.css'
 import axiosInstance from './../../axiosApi';
 
 export default function Login(props) {
-  const { setLoggedIn } = props;
+  const { setLoggedIn, setProgress } = props;
   const navigate = useNavigate();
   const [user, setUser] = useState({"username": "", "password": ""})
 
@@ -19,6 +19,7 @@ export default function Login(props) {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setProgress(20);
     let response = await axiosInstance.post('/api/token/obtain/', user)
     console.log(response)
     axiosInstance.defaults.headers['Authorization'] = 'JWT ' + response.data.access
@@ -27,6 +28,7 @@ export default function Login(props) {
     localStorage.setItem('access_token', response.data.access)
     localStorage.setItem('refresh_token', response.data.refresh)
     setLoggedIn({loggedIn: true, user: user['username'], token: response.data.access})
+    setProgress(100);
     navigate('/')
   }
 

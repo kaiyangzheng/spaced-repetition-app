@@ -90,6 +90,11 @@
     align-items: center;
 }
 
+.topbar-left{
+    display: flex;
+    align-items: center;
+}
+
 @media screen and (prefers-color-scheme: dark) {
     .close-button{
         color: white;

@@ -20,7 +20,9 @@ export default function Topbar(props) {
         <div className="topbar-wrapper">
             <div className="topbar-left">
                 <AiOutlineMenu className="menu-icon" onClick={handleOpen}/>
-                <span className="logo-left">Re</span><span className="logo-right">task</span>
+                <div className="logo">
+                    <span className="logo-left">Re</span><span className="logo-right">Task</span>
+                </div>
             </div>
             <div className="topbar-right">
                 {!isOpen ? <span className="username">
@@ -31,7 +33,7 @@ export default function Topbar(props) {
 
                 </span> :
                 <div className="menu-open-right">
-                  <span className="logo-left">Re</span><span className="logo-right">task</span>
+                  <span className="logo-left">Re</span><span className="logo-right">Task</span>
                 </div>}  
             </div>
         </div>
