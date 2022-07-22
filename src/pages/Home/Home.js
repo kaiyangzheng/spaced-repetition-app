@@ -80,6 +80,9 @@ export default function Home(props) {
 
     for (let task in tasks){
       let taskData = tasks[task];
+      if (taskData?.prev_review_date != null){
+        totalTasks += 1;
+      }
       totalTasks += 1;
       if (taskData?.quality >= 3){
         totalUnderstood += 1;

@@ -4,6 +4,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import convertUtcToLocal from '../../utils/dateHelpers';
 import axiosInstance from '../../axiosApi';
 import './initiatetaskmodal.css'
+import { useNavigate } from 'react-router';
 import axios from 'axios';
 
 const customStyles = {
@@ -69,6 +70,7 @@ export default function IntiateTaskModal(props) {
     const [theme, setTheme] = useState('light');
     const [qualityValue, setQualityValue] = useState(-1);
     const [finishedTask, setFinishedTask] = useState(false);
+    const navigate = useNavigate();
   
     useEffect(()=>{
       if (prefersDarkMode) {
@@ -139,7 +141,9 @@ export default function IntiateTaskModal(props) {
                     <div className="results-container">
                         Next review date: {convertUtcToLocal(selectedInitiateTask?.next_review_date)}
                     </div>
-                    
+                    <div className="return-button">
+                        <button className="return-task-button" onClick={()=>{setIsModalOpen(false); setFinishedTask(false)}}>Return</button>
+                    </div>
                 </div>
             </div>}
         </Modal>
