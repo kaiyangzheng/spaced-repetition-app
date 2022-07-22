@@ -1,0 +1,53 @@
+@import './../../vars.css';
+
+html{
+    color: var(--dark-text);
+}
+
+.home{
+    flex: 4;
+}
+
+.home h1{
+    margin: 0 20px;
+    text-decoration: underline;
+    text-decoration-color: var(--dark-button-background);
+    text-decoration-thickness: 4px;
+}
+
+.overviewContainer{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 91.3vw;
+
+}
+
+.overviewItem{
+    flex: 1;
+    margin: 10px 20px;
+    padding: 30px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-border);
+}
+
+.overviewItemTitle{
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex;
+    align-items: center;
+}
+
+.overviewItemContent{
+    font-size: 1.5em;
+    font-weight: 600;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.taskDescription{
+    color: var(--dark-active);
+    font-size: 0.7em;
+    font-weight: 400;
+}

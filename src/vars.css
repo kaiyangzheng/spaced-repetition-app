@@ -7,4 +7,7 @@
     --dark-important-text: white;
     --dark-logo-left: #0096FF;
     --dark-logo-right: #f3172d;
+    --dark-button-background: #00bcd4;
+    --dark-button-hover: #00acc1;
+    --dark-highlight: #00bcd4;
 }
