@@ -151,6 +151,7 @@ export default function Home(props) {
             </div>
             <div className="overview-item-content">
               <div className="item mt-20">
+                hi
                 {tasks.length} <span className="description">Tasks Added</span>
               </div>
               <div className="item mt-20">
