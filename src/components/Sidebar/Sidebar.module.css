@@ -1,0 +1,65 @@
+@import './../../vars.css';
+
+
+.sidebar{
+    flex: 1;
+    height: calc(100vh-50px);
+    background-color: var(--dark-background);
+    border: var(--dark-border);
+    position: sticky;
+    top: 50px;
+}
+
+.sidebarWrapper{
+    padding: 20px;
+    border: var(--dark-border) solid 1px;
+    color: var(--dark-text);
+}
+
+.sidebarMenu{
+    margin-bottom: 10px;
+}
+
+.sidebarTitle{
+    font-size: 13px;
+    color: var(--dark-text);
+    margin-bottom: 0px;
+    margin-left: 5px;
+}
+
+.sidebarList{
+    list-style: none;
+    padding: 5px;
+}
+
+.sidebarListItem{
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    color: var(--dark-important-text);
+}
+
+.sidebarListItemActive{
+    padding: 5px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    border-radius: 10px;
+    color: var(--dark-important-text);
+    background: var(--dark-active);
+}
+
+.sidebarListItem:hover{
+    background: var(--dark-active);
+}
+
+.active{
+    background: var(--dark-active);
+}
+
+.sidebarIcon{
+    margin-right: 5px;
+    font-size: 20px !important;
+}

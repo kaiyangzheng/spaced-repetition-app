@@ -1,0 +1,10 @@
+:root{
+    --dark-root-background: black;
+    --dark-background: rgb(51, 51, 51);
+    --dark-text: hsl(210, 10%, 80%);
+    --dark-border: hsl(210, 10%, 70%);
+    --dark-active: gray;
+    --dark-important-text: white;
+    --dark-logo-left: #0096FF;
+    --dark-logo-right: #f3172d;
+}

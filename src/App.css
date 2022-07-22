@@ -1,11 +1,7 @@
-body{
-  background: white;
-}
+@import './vars.css';
 
-@media screen and (prefers-color-scheme: dark) {
-  body {
-      background: white;
-  }
+:root{
+  background-color: var(--dark-root-background);
 }
 
 .container{
